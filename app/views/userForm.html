@@ -1,0 +1,226 @@
+<div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 830px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">{{titleForm}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="userForm" name="userForm" role="form" style="display: block;" novalidate>
+                            <div class="input-group">
+                                <h4>Nombres y apellidos</h4>
+                                <div class="rowForm">
+                                    <input  ng-model="user.firstName"
+                                            autofocus
+                                            type="text"
+                                            name="firstName"
+                                            id="firstName"
+                                            tabindex="1"
+                                            class="form-control"
+                                            placeholder="Primer nombre"
+                                            value=""
+                                            required>
+                                    <div ng-messages="userForm.firstName.$error">
+                                        <div ng-show="userForm.firstName.$dirty"
+                                             class="text-danger"
+                                             ng-message="required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rowForm">
+                                    <input  ng-model="user.secondName"
+                                            autofocus
+                                            type="text"
+                                            name="secondName"
+                                            id="secondName"
+                                            tabindex="1"
+                                            class="form-control"
+                                            placeholder="Segundo nombre"
+                                            value=""
+                                            required>
+                                    <div ng-messages="userForm.secondName.$error">
+                                        <div ng-show="userForm.secondName.$dirty"
+                                             class="text-danger"
+                                             ng-message="required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rowForm">
+                                    <input  ng-model="user.lastName"
+                                            autofocus
+                                            type="text"
+                                            name="lastName"
+                                            id="lastName"
+                                            tabindex="1"
+                                            class="form-control"
+                                            placeholder="Primer apellido"
+                                            value=""
+                                            required>
+                                    <div ng-messages="userForm.lastName.$error">
+                                        <div ng-show="userForm.lastName.$dirty"
+                                             class="text-danger"
+                                             ng-message="required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rowForm">
+                                    <input  ng-model="user.secondLastName"
+                                            autofocus
+                                            type="text"
+                                            name="secondLastName"
+                                            id="secondLastName"
+                                            tabindex="1"
+                                            class="form-control"
+                                            placeholder="Segundo apellido"
+                                            value="">
+                                </div>
+                            </div>
+                            <hr>
+                            <h4>Datos de contacto</h4>
+                            <div class="input-group">
+                                <div class="rowForm">
+                                    <input  ng-model="user.email"
+                                            autofocus
+                                            type="text"
+                                            name="email"
+                                            id="email"
+                                            tabindex="1"
+                                            class="form-control"
+                                            placeholder="Correo electrónico"
+                                            value=""
+                                            disabled>
+                                </div>
+                                <div class="rowForm">
+                                    <input  ng-model="user.phone"
+                                            autofocus
+                                            type="text"
+                                            name="phone"
+                                            id="phone"
+                                            tabindex="1"
+                                            class="form-control"
+                                            placeholder="Teléfono"
+                                            value=""
+                                            required>
+                                    <div ng-messages="userForm.phone.$error">
+                                        <div ng-show="userForm.phone.$dirty"
+                                             class="text-danger"
+                                             ng-message="required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rowForm">
+                                    <input  ng-model="user.address"
+                                            style="width: 378px;"
+                                            autofocus
+                                            type="text"
+                                            name="address"
+                                            id="address"
+                                            tabindex="1"
+                                            class="form-control"
+                                            placeholder="Dirección"
+                                            value=""
+                                            required>
+                                    <div ng-messages="userForm.address.$error">
+                                        <div ng-show="userForm.address.$dirty"
+                                             class="text-danger"
+                                             ng-message="required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <h4>Perfil</h4>
+                            <div class="input-group">
+                                <div class="rowForm">
+                                    <select ng-options="item.id as item.name for item in $root.rules"
+                                            ng-model="user.rule_id" name="rule_id" class="form-control" id="rule_id" required>
+                                        <option value="">Seleccione...</option>
+                                    </select>
+                                    <div ng-messages="userForm.idType.$error">
+                                        <div ng-show="userForm.idType.$dirty"
+                                             class="text-danger"
+                                             ng-message="required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rowForm">
+                                    <div class="radio-inline">
+                                        <label class="radio-inline"><input ng-model="user.status" ng-value="true" type="radio" name="status">Activo</label>
+                                        <label class="radio-inline"><input ng-model="user.status" ng-value="false" type="radio" name="status">Inactivo</label>
+                                    </div>
+                                    <div ng-messages="userForm.status.$error">
+                                        <div ng-show="userForm.status.$dirty"
+                                             class="text-danger"
+                                             ng-message="required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="btnOk=='Agregar'">
+                                <hr>
+                                <h4>Contraseña</h4>
+                                <div class="rowForm">
+                                    <input  ng-model="user.password"
+                                            autofocus
+                                            type="password"
+                                            name="password"
+                                            id="password"
+                                            tabindex="1"
+                                            class="form-control"
+                                            placeholder="Contraseña"
+                                            value=""
+                                            ng-minlength="5"
+                                            ng-maxlength="10"
+                                            required>
+                                    <div ng-messages="userForm.password.$error">
+                                        <div ng-show="userForm.password.$dirty"
+                                             class="text-danger"
+                                             ng-message="required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rowForm">
+                                    <input  ng-model="repeatPassword"
+                                            autofocus
+                                            type="password"
+                                            name="repeatPassword"
+                                            id="repeatPassword"
+                                            tabindex="1"
+                                            class="form-control"
+                                            placeholder="Repita la contraseña"
+                                            value=""
+                                            ng-minlength="5"
+                                            ng-maxlength="10"
+                                            data-match="password"
+                                            required>
+                                    <div ng-messages="userForm.repeatPassword.$error">
+                                        <div ng-show="resetForm.repeatPassword.$error.match" class="text-danger">Las contraseñas no coinciden!</div>
+                                        <div ng-show="resetForm.repeatPassword.$dirty" class="text-danger" ng-message="minlength">Se requieren 5 caracteres mínimos.</div>
+                                        <div ng-show="resetForm.repeatPassword.$dirty" class="text-danger" ng-message="maxlength">Se requieren 10 caracteres maximos.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button ng-if="btnOk=='Agregar'" type="button" class="btn btn-primary" ng-click="addUser(user, userForm)">{{btnOk}}</button>
+                <button ng-if="btnOk=='Guardar'" type="button" class="btn btn-primary" ng-click="updateUser(user, userForm)">{{btnOk}}</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

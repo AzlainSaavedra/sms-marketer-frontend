@@ -1,0 +1,189 @@
+<!-- Notificaciones -->
+<messages data="dataMessages"></messages>
+<!-- Fin notificaciones -->
+<script>
+    $(function() {
+
+        $('#login-form-link').click(function(e) {
+            $("#login-form").delay(100).fadeIn(100);
+            $("#register-form").fadeOut(100);
+            $('#register-form-link').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+        $('#register-form-link').click(function(e) {
+            $("#register-form").delay(100).fadeIn(100);
+            $("#login-form").fadeOut(100);
+            $('#login-form-link').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+
+    });
+</script>
+<div class="container" style="padding-top: 90px;">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#" class="active" id="login-form-link">Inicio de sesión
+                            </a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="#" id="register-form-link">Registro</a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form id="login-form" name="loginform" role="form" style="display: block;" novalidate>
+                                <div class="form-group">
+                                    <input  ng-model="email"
+                                            autofocus
+                                            type="text"
+                                            name="email"
+                                            id="email"
+                                            tabindex="1"
+                                            class="form-control"
+                                            placeholder="Usuario"
+                                            value=""
+                                            required>
+                                    <div ng-messages="loginform.email.$error">
+                                        <div ng-show="loginform.email.$dirty"
+                                             class="text-danger"
+                                             ng-message="required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input ng-model="password" type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña" ng-minlength="5" ng-maxlength="10" required>
+                                    <div ng-messages="loginform.password.$error">
+                                        <div ng-show="loginform.password.$dirty" class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                        <div ng-show="loginform.password.$dirty" class="text-danger" ng-message="minlength">Se requieren 5 caracteres mínimos.</div>
+                                        <div ng-show="loginform.password.$dirty" class="text-danger" ng-message="maxlength">Se requieren 10 caracteres maximos.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <input ng-change="remenberSession(rememberMe)" ng-model="rememberMe" type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                    <label for="remember"> Recordarme</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input ng-disabled="!loginform.$valid" ng-click="login()" type="button" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Entrar">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                <a href="#" data-target="#pwdModal" data-toggle="modal">Olvido su contraseña?</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form name="registerForm" id="register-form" role="form" style="display: none;" novalidate>
+                                <div class="form-group">
+                                    <input ng-model="nombre" type="text" name="nombre" id="nombre" tabindex="1" class="form-control" placeholder="Nombre" value="" required>
+                                    <div ng-messages="registerForm.nombre.$error">
+                                        <div ng-show="registerForm.nombre.$dirty" class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input ng-model="apellido" type="text" name="apellido" id="apellido" tabindex="1" class="form-control" placeholder="Apellido" value="" required>
+                                    <div ng-messages="registerForm.apellido.$error">
+                                        <div ng-show="registerForm.apellido.$dirty" class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input ng-model="registerEmail" type="email" name="registerEmail" id="registerEmail" tabindex="1" class="form-control" placeholder="Email Address" value="" required>
+                                    <div ng-messages="registerForm.registerEmail.$error">
+                                        <div ng-show="registerForm.registerEmail.$dirty" class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                        <div ng-show="registerForm.registerEmail.$dirty" class="text-danger" ng-message="email">Formato de correo electrónico invalido.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input ng-model="registerPassword" type="password" name="registerPassword" id="registerPassword" tabindex="2" class="form-control" placeholder="Contraseña" ng-minlength="5" ng-maxlength="10" required>
+                                    <div ng-messages="registerForm.registerPassword.$error">
+                                        <div ng-show="registerForm.registerPassword.$dirty" class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                        <div ng-show="registerForm.registerPassword.$dirty" class="text-danger" ng-message="minlength">Se requieren 5 caracteres mínimos.</div>
+                                        <div ng-show="registerForm.registerPassword.$dirty" class="text-danger" ng-message="maxlength">Se requieren 10 caracteres maximos.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input ng-model="registerConfirmPassword"
+                                           type="password" name="registerConfirmPassword"
+                                           id="registerConfirmPassword"
+                                           tabindex="2"
+                                           class="form-control"
+                                           placeholder="Repetir contraseña"
+                                           data-match="registerPassword">
+                                    <div ng-messages="registerForm.registerConfirmPassword.$error">
+                                        <div ng-show="registerForm.registerConfirmPassword.$error.match" class="text-danger">Las contraseñas no coinciden!</div>
+                                        <div ng-show="registerForm.registerConfirmPassword.$dirty" class="text-danger" ng-message="minlength">Se requieren 5 caracteres mínimos.</div>
+                                        <div ng-show="registerForm.registerConfirmPassword.$dirty" class="text-danger" ng-message="maxlength">Se requieren 10 caracteres maximos.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input ng-disabled="!registerForm.$valid" ng-click="register()" type="button" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Registrarse">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="pwdModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h1 class="text-center">Restablecer contraseña</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="text-center">
+
+                                    <p>Si ha olvidado su contraseña puede restablecerla desde aqui.</p>
+                                    <div class="panel-body">
+                                        <fieldset>
+                                            <form name="resetPasswordForm" novalidate>
+                                                <div class="form-group">
+                                                    <input ng-model="resetEmail" class="form-control input-lg" placeholder="Dirección de correo electrónico" name="resetEmail" type="email" required>
+                                                    <div ng-messages="resetPasswordForm.resetEmail.$error" style="text-align: left">
+                                                        <div ng-show="resetPasswordForm.resetEmail.$dirty" class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                                        <div ng-show="resetPasswordForm.resetEmail.$dirty" class="text-danger" ng-message="email">Formato de correo electrónico invalido.</div>
+                                                    </div>
+                                                </div>
+                                                <input ng-disabled="!resetPasswordForm.$valid" ng-click="resetPassword(resetEmail, resetPasswordForm)" class="form-control btn btn-primary" value="Restablecer" type="button">
+                                            </form>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <button id="cancelResetPasswordBtn" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

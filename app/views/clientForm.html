@@ -1,0 +1,214 @@
+<div class="modal fade" id="modalEditClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width: 428px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Editar cliente</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <form id="editClientForm" name="editClientForm" role="form" style="display: block;" novalidate>
+              <div class="input-group">
+                <h4>Nombres y apellidos</h4>
+                <div class="rowForm">
+                  <input  ng-model="clientSelected.firstName"
+                          autofocus
+                          type="text"
+                          name="firstName"
+                          id="firstName"
+                          tabindex="1"
+                          class="form-control"
+                          placeholder="Primer nombre"
+                          value=""
+                          required>
+                  <div ng-messages="editClientForm.firstName.$error">
+                    <div ng-show="editClientForm.firstName.$dirty"
+                         class="text-danger"
+                         ng-message="required">
+                      Este campo es requerido.
+                    </div>
+                  </div>
+                </div>
+                <div class="rowForm">
+                  <input  ng-model="clientSelected.secondName"
+                          autofocus
+                          type="text"
+                          name="secondName"
+                          id="secondName"
+                          tabindex="1"
+                          class="form-control"
+                          placeholder="Segundo nombre"
+                          value=""
+                          required>
+                  <div ng-messages="editClientForm.secondName.$error">
+                    <div ng-show="editClientForm.secondName.$dirty"
+                         class="text-danger"
+                         ng-message="required">
+                      Este campo es requerido.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group">
+                <div class="rowForm">
+                  <input  ng-model="clientSelected.lastName"
+                          autofocus
+                          type="text"
+                          name="lastName"
+                          id="lastName"
+                          tabindex="1"
+                          class="form-control"
+                          placeholder="Primer apellido"
+                          value=""
+                          required>
+                  <div ng-messages="editClientForm.lastName.$error">
+                    <div ng-show="editClientForm.lastName.$dirty"
+                         class="text-danger"
+                         ng-message="required">
+                      Este campo es requerido.
+                    </div>
+                  </div>
+                </div>
+                <div class="rowForm">
+                  <input  ng-model="clientSelected.secondLastName"
+                          autofocus
+                          type="text"
+                          name="secondLastName"
+                          id="secondLastName"
+                          tabindex="1"
+                          class="form-control"
+                          placeholder="Segundo apellido"
+                          value="">
+                </div>
+              </div>
+              <hr>
+              <h4>Datos de contacto</h4>
+              <div class="input-group">
+                <div class="rowForm">
+                  <input  ng-model="clientSelected.email"
+                          autofocus
+                          type="text"
+                          name="email"
+                          id="email"
+                          tabindex="1"
+                          class="form-control"
+                          placeholder="Correo electrónico"
+                          value=""
+                          disabled>
+                </div>
+                <div class="rowForm">
+                  <input  ng-model="clientSelected.phone"
+                          autofocus
+                          type="text"
+                          name="phone"
+                          id="phone"
+                          tabindex="1"
+                          class="form-control"
+                          placeholder="Teléfono"
+                          value=""
+                          required>
+                  <div ng-messages="editClientForm.phone.$error">
+                    <div ng-show="editClientForm.phone.$dirty"
+                         class="text-danger"
+                         ng-message="required">
+                      Este campo es requerido.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group">
+                <div class="rowForm">
+                  <input  ng-model="clientSelected.address"
+                          style="width: 378px;"
+                          autofocus
+                          type="text"
+                          name="address"
+                          id="address"
+                          tabindex="1"
+                          class="form-control"
+                          placeholder="Dirección"
+                          value=""
+                          required>
+                  <div ng-messages="editClientForm.address.$error">
+                    <div ng-show="editClientForm.address.$dirty"
+                         class="text-danger"
+                         ng-message="required">
+                      Este campo es requerido.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h4>Identificaión</h4>
+              <div class="input-group">
+                <div class="rowForm">
+                  <select ng-model="clientSelected.idType" name="idType" class="form-control" id="idType" required>
+                    <option value="V">V</option>
+                    <option value="E">E</option>
+                    <option value="J">J</option>
+                    <option value="G">G</option>
+                  </select>
+                  <div ng-messages="editClientForm.idType.$error">
+                    <div ng-show="editClientForm.idType.$dirty"
+                         class="text-danger"
+                         ng-message="required">
+                      Este campo es requerido.
+                    </div>
+                  </div>
+                </div>
+                <div class="rowForm">
+                  <input  ng-model="clientSelected.idClient"
+                          autofocus
+                          type="text"
+                          name="idClient"
+                          id="idClient"
+                          tabindex="1"
+                          class="form-control"
+                          placeholder="Nro de identificación"
+                          value=""
+                          required>
+                  <div ng-messages="editClientForm.idClient.$error">
+                    <div ng-show="editClientForm.idClient.$dirty"
+                         class="text-danger"
+                         ng-message="required">
+                      Este campo es requerido.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group">
+                <div class="rowForm">
+                  <input  ng-model="clientSelected.businessName"
+                          style="width: 378px;"
+                          autofocus
+                          type="text"
+                          name="businessName"
+                          id="businessName"
+                          tabindex="1"
+                          class="form-control"
+                          placeholder="Razon social"
+                          value=""
+                          required>
+                  <div ng-messages="editClientForm.businessName.$error">
+                    <div ng-show="editClientForm.businessName.$dirty"
+                         class="text-danger"
+                         ng-message="required">
+                      Este campo es requerido.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" ng-click="updateClient(clientSelected, editClientForm)">Aceptar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
