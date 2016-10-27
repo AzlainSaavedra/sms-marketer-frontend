@@ -52,7 +52,6 @@ angular.module('standartApp')
                 url: url_base + "/user/",
                 method: "POST",
                 data: user,
-                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8'
                 }
