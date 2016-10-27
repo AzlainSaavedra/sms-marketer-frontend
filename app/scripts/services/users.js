@@ -48,11 +48,24 @@ angular.module('standartApp')
         function postUser(user){
             console.log(url_base + "/user/")
             var defer = $q.defer();
-            $http.post(url_base + "/user/",user,config).success(function (response) {
+            $http({
+                url: url_base + "/user/",
+                method: "POST",
+                data: user,
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }).success(function (response) {
                 defer.resolve(response);
             }).error(function (response) {
                 defer.reject(response);
-            });
+            });;
+           /* $http.post(url_base + "/user/",user,config).success(function (response) {
+                defer.resolve(response);
+            }).error(function (response) {
+                defer.reject(response);
+            });*/
             return defer.promise;
         }
 
