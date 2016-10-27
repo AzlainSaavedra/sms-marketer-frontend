@@ -8,7 +8,7 @@
  * Controller of the standartApp
  */
 angular.module('standartApp')
-    .controller('UsersCtrl',['$scope','$rootScope','NgTableParams','user', function ($scope, $rootScope, NgTableParams, userFact) {
+    .controller('UsersCtrl',['$scope','$rootScope','NgTableParams','user','$location','$window', function ($scope, $rootScope, NgTableParams, userFact, $location, $window) {
 
         $scope.usersList = [];
         $scope.user = {};
@@ -21,6 +21,13 @@ angular.module('standartApp')
         $scope.initTable = initTable;
         $scope.showUserForm = showUserForm;
         $scope.showModalDeleteUser = showModalDeleteUser;
+
+        var forceSSL = function () {
+            if ($location.protocol() !== 'https') {
+                $window.location.href = $location.absUrl().replace('http', 'https');
+            }
+        };
+        forceSSL();
 
         $scope.initCtrl();
 
