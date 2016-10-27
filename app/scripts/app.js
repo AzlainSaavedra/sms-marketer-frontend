@@ -31,6 +31,7 @@ angular
 
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        $httpProvider.defaults.withCredentials = true;
         // Parametros de configuración de jwt
         $authProvider.loginUrl = url_base + "/login";
         $authProvider.signupUrl = url_base + "/register";
