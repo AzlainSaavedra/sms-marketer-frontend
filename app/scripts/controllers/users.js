@@ -22,13 +22,6 @@ angular.module('standartApp')
         $scope.showUserForm = showUserForm;
         $scope.showModalDeleteUser = showModalDeleteUser;
 
-        var forceSSL = function () {
-            if ($location.protocol() !== 'https') {
-                $window.location.href = $location.absUrl().replace('http', 'https');
-            }
-        };
-        forceSSL();
-
         $scope.initCtrl();
 
 
