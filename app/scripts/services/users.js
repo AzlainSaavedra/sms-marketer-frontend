@@ -11,7 +11,10 @@ angular.module('standartApp')
     .factory('user', function ($http, $q) {
 
         var config = {
-            "Content-Type": "application/json"
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         }
 
         var dataFactory = {};
