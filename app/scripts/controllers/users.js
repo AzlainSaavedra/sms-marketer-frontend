@@ -78,7 +78,7 @@ angular.module('standartApp')
 
         function getUsers() {
             userFact.getUsers().then(function (response) {
-                $scope.usertList = response.Clients
+                $scope.usertList = response.data
                 $scope.initTable($scope.usertList);
             })
         }

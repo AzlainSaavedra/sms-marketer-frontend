@@ -10,7 +10,7 @@
 angular.module('standartApp')
     .factory('user', function ($http, $q) {
 
-        var config = {
+        var headers = {
             'Access-Control-Allow-Origin' : '*',
             'Access-Control-Allow-Methods' : 'POST, GET, OPTIONS, PUT',
             'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ angular.module('standartApp')
         function postUser(user){
             console.log(url_base + "/user/")
             var defer = $q.defer();
-           $http.jsonp(url_base + "/user/",user,config).success(function (response) {
+           $http.post(url_base + "/user/",user,headers).success(function (response) {
                 defer.resolve(response);
             }).error(function (response) {
                 defer.reject(response);
@@ -61,7 +61,7 @@ angular.module('standartApp')
 
         function putUser(user){
             var defer = $q.defer();
-            $http.put(url_base + "/user/"+user.id,user,config).success(function (response) {
+            $http.put(url_base + "/user/"+user.id,user,headers).success(function (response) {
                 defer.resolve(response);
             }).error(function (response) {
                 defer.reject(response);
