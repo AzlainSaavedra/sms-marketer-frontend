@@ -58,7 +58,7 @@ angular.module('standartApp')
 
         function getRols() {
             commonFactory.getRols().then(function (response) {
-                $rootScope.rules = response.Rules;
+                $rootScope.rules = response;
             })
         }
 
