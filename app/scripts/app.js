@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 
-var url_base = "//easycors.herokuapp.com/api-v1";
+var url_base = "//smsmarketerv2:8082/api-v1";
 //var url_base = "http://easycors.app/api-v1";
 
 //var url_base = "http://apirest.app/api-v1";

@@ -50,9 +50,9 @@
             function tokenValidate() {
                 var defer = $q.defer();
 
-                $http.post(url_base +"/tokenValidate").success(function (response) {
+                $http.post(url_base +"/tokenValidate").then(function (response) {
                     defer.resolve(response);
-                }).error(function (err) {
+                }).catch(function (err) {
                     defer.reject(err);
                 });
 
@@ -62,9 +62,9 @@
             function resetPassword(email) {
                 var defer = $q.defer();
 
-                $http.put(url_base +"/resetPassword", {email: email}).success(function (response) {
+                $http.put(url_base +"/resetPassword", {email: email}).then(function (response) {
                     defer.resolve(response);
-                }).error(function (err) {
+                }).catch(function (err) {
                     defer.reject(err);
                 });
 
@@ -74,9 +74,9 @@
             function passwordChange(data) {
                 var defer = $q.defer();
 
-                $http.put(url_base +"/passwordChange", data, config).success(function (response) {
+                $http.put(url_base +"/passwordChange", data, config).then(function (response) {
                     defer.resolve(response);
-                }).error(function (err) {
+                }).catch(function (err) {
                     defer.reject(err);
                 });
 
@@ -86,9 +86,10 @@
             function userAuth() {
                 var defer = $q.defer();
 
-                $http.post(url_base +"/userAuth", {}, config).success(function (response) {
-                    defer.resolve(response);
-                }).error(function (err) {
+                $http.post(url_base +"/userAuth", {}, config).then(function (response) {
+                    console.log(response)
+                    defer.resolve(response.data);
+                }).catch(function (err) {
                     defer.reject(err);
                 });
 

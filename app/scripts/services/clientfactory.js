@@ -24,9 +24,9 @@ angular.module('standartApp')
 
     function getUser(email){
       var defer = $q.defer();
-      $http.post(url_base + "/user",{email:email},config).success(function (response) {
-        defer.resolve(response);
-      }).error(function (response) {
+      $http.post(url_base + "/user",{email:email},config).then(function (response) {
+        defer.resolve(response.data);
+      }).catch(function (response) {
         defer.reject(response);
       });
       return defer.promise;
@@ -34,9 +34,9 @@ angular.module('standartApp')
 
     function getClients(){
       var defer = $q.defer();
-      $http.get(url_base + "/client").success(function (response) {
-        defer.resolve(response);
-      }).error(function (response) {
+      $http.get(url_base + "/client").then(function (response) {
+        defer.resolve(response.data);
+      }).catch(function (response) {
         defer.reject(response);
       });
       return defer.promise;
@@ -44,9 +44,9 @@ angular.module('standartApp')
 
     function getClient(id){
       var defer = $q.defer();
-      $http.get(url_base + "/client/"+id).success(function (response) {
-        defer.resolve(response);
-      }).error(function (response) {
+      $http.get(url_base + "/client/"+id).then(function (response) {
+        defer.resolve(response.data);
+      }).catch(function (response) {
         defer.reject(response);
       });
       return defer.promise;
@@ -54,9 +54,9 @@ angular.module('standartApp')
 
     function putClient(client){
       var defer = $q.defer();
-      $http.put(url_base + "/client/"+client.id,client,config).success(function (response) {
-        defer.resolve(response);
-      }).error(function (response) {
+      $http.put(url_base + "/client/"+client.id,client,config).then(function (response) {
+        defer.resolve(response.data);
+      }).catch(function (response) {
         defer.reject(response);
       });
       return defer.promise;
@@ -64,9 +64,9 @@ angular.module('standartApp')
 
     function deleteClient(id){
       var defer = $q.defer();
-      $http.delete(url_base + "/client/"+id).success(function (response) {
-        defer.resolve(response);
-      }).error(function (response) {
+      $http.delete(url_base + "/client/"+id).then(function (response) {
+        defer.resolve(response.data);
+      }).catch(function (response) {
         defer.reject(response);
       });
       return defer.promise;

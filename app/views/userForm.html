@@ -153,8 +153,8 @@
                                 </div>
                                 <div class="rowForm">
                                     <div class="radio-inline">
-                                        <label class="radio-inline"><input ng-model="user.status" ng-value="true" type="radio" name="status">Activo</label>
-                                        <label class="radio-inline"><input ng-model="user.status" ng-value="false" type="radio" name="status">Inactivo</label>
+                                        <label class="radio-inline"><input ng-model="user.status" ng-value="1" type="radio" name="status">Activo</label>
+                                        <label class="radio-inline"><input ng-model="user.status" ng-value="0" type="radio" name="status">Inactivo</label>
                                     </div>
                                     <div ng-messages="userForm.status.$error">
                                         <div ng-show="userForm.status.$dirty"

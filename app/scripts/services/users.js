@@ -24,15 +24,11 @@ angular.module('standartApp')
         dataFactory.putUser = putUser;
         dataFactory.deleteUser = deleteUser;
 
-        console.log(url_base + "/user/");
-
-
-
         function getUsers(){
             var defer = $q.defer();
-            $http.get(url_base + "/user").success(function (response) {
-                defer.resolve(response);
-            }).error(function (response) {
+            $http.get(url_base + "/user").then(function (response) {
+                defer.resolve(response.data);
+            }).catch(function (response) {
                 defer.reject(response);
             });
             return defer.promise;
@@ -40,20 +36,19 @@ angular.module('standartApp')
 
         function getUser(id){
             var defer = $q.defer();
-            $http.get(url_base + "/user/"+id).success(function (response) {
-                defer.resolve(response);
-            }).error(function (response) {
+            $http.get(url_base + "/user/"+id).then(function (response) {
+                defer.resolve(response.data);
+            }).catch(function (response) {
                 defer.reject(response);
             });
             return defer.promise;
         }
 
         function postUser(user){
-            console.log(url_base + "/user/")
             var defer = $q.defer();
-           $http.post(url_base + "/user/",user,headers).success(function (response) {
-                defer.resolve(response);
-            }).error(function (response) {
+           $http.post(url_base + "/user",user,headers).then(function (response) {
+                defer.resolve(response.data);
+            }).catch(function (response) {
                 defer.reject(response);
             });
             return defer.promise;
@@ -61,9 +56,9 @@ angular.module('standartApp')
 
         function putUser(user){
             var defer = $q.defer();
-            $http.put(url_base + "/user/"+user.id,user,headers).success(function (response) {
-                defer.resolve(response);
-            }).error(function (response) {
+            $http.put(url_base + "/user/"+user.id,user,headers).then(function (response) {
+                defer.resolve(response.data);
+            }).catch(function (response) {
                 defer.reject(response);
             });
             return defer.promise;
@@ -71,9 +66,9 @@ angular.module('standartApp')
 
         function deleteUser(id){
             var defer = $q.defer();
-            $http.delete(url_base + "/user/"+id).success(function (response) {
-                defer.resolve(response);
-            }).error(function (response) {
+            $http.delete(url_base + "/user/"+id).then(function (response) {
+                defer.resolve(response.data);
+            }).catch(function (response) {
                 defer.reject(response);
             });
             return defer.promise;

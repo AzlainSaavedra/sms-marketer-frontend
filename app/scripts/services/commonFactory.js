@@ -23,9 +23,9 @@
 
       function getRols(){
         var defer = $q.defer();
-        $http.get(url_base + "/rule").success(function (response) {
-          defer.resolve(response);
-        }).error(function (response) {
+        $http.get(url_base + "/rule").then(function (response) {
+          defer.resolve(response.data.data);
+        }).catch(function (response) {
           defer.reject(response);
         });
         return defer.promise;

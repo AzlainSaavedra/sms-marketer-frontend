@@ -52,12 +52,13 @@
                                 $state.go($rootScope.envName + ".clients");
 
                             }).catch(function (err) {
+                                console.log(err)
                                 $rootScope.showMessage("Error del sistema. Por favor intentelo de nuevo.", "danger");
                                 $('#login-submit').removeAttr('disabled');
                             });
 
                         })
-                        .catch(function (response) {
+                        .catch(function (err) {
                             // Si ha habido errores llegamos a esta parte
                             $('#login-submit').removeAttr('disabled');
                             $rootScope.showMessage("Error del sistema. Por favor intentelo de nuevo.", "danger");
