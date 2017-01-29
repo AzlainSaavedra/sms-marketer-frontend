@@ -8,7 +8,7 @@
  * Controller of the standartApp
  */
 angular.module('standartApp')
-  .controller('ConfigurationController', function ($scope, $rootScope, authFactory, $timeout) {
+  .controller('ConfigurationController', function ($scope, $rootScope, authFactory, cyptoCache) {
 
     /*
     * Motodos publicos
@@ -16,7 +16,8 @@ angular.module('standartApp')
     $scope.passwordChange = passwordChange;
 
     function passwordChange(){
-      $scope.user = JSON.parse(localStorage.getItem("userStandartApp")).User;
+      $scope.user = JSON.parse(cyptoCache.get("userStandartApp")).user;
+
       var data = {
         id:$scope.user.id,
         email: $scope.user.email,

@@ -4,7 +4,7 @@
 (function () {
     "use strict";
     angular.module('standartApp')
-        .factory('authFactory', ['callRest', '$log', '$http', '$q', '$auth', function (callRest, $log, $http, $q, $auth) {
+        .factory('authFactory', ['callRest', '$log', '$http', '$q', 'cyptoCache', function (callRest, $log, $http, $q, cyptoCache) {
 
             var dataFactory = {};
             var config = {
@@ -20,18 +20,19 @@
 
             function rememberSession(option) {
                 if (option) {
-                    localStorage.setItem("standartApp_remember_session", true);
+                    cyptoCache.put("standartApp_remember_session", "true");
                 } else {
-                    localStorage.setItem("standartApp_remember_session", false);
+                    cyptoCache.remove("standartApp_remember_session");
                 }
             }
 
             function getRememberSession() {
                 var defer = $q.defer();
                 var ret = false;
-                if (JSON.parse(localStorage.getItem("standartApp_remember_session"))) {
+
+                if (JSON.parse(cyptoCache.get("standartApp_remember_session"))) {
                     tokenValidate().then(function (response) {
-                        if (response.token_validate) {
+                        if (response.data.token_validate) {
                             ret = true;
                         } else {
                             ret = false;
@@ -87,7 +88,6 @@
                 var defer = $q.defer();
 
                 $http.post(url_base +"/userAuth", {}, config).then(function (response) {
-                    console.log(response)
                     defer.resolve(response.data);
                 }).catch(function (err) {
                     defer.reject(err);

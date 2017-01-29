@@ -8,7 +8,7 @@
  * Controller of the standartApp
  */
 angular.module('standartApp')
-    .controller('ClientsCtrl', function ($scope, $rootScope, NgTableParams, clientFactory) {
+    .controller('ClientsCtrl', function ($scope, $rootScope, NgTableParams, clientFactory, authFactory, $state) {
 
         $scope.client = {};
         $scope.clientSelected = {};

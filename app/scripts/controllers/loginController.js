@@ -5,8 +5,8 @@
     "use strict";
     angular.module('standartApp')
         .controller('loginController', ['$scope', '$http', '$q', '$rootScope', '$log', '$state', '$auth', '$timeout',
-            'authFactory', 'clientFactory',
-            function ($scope, $http, $q, $rootScope, $log, $state, $auth, $timeout, authFactory, user) {
+            'authFactory', 'cyptoCache',
+            function ($scope, $http, $q, $rootScope, $log, $state, $auth, $timeout, authFactory, cyptoCache) {
 
                 $scope.email = "";
                 $scope.password = "";
@@ -16,6 +16,17 @@
                 $scope.alertMsgServerError = false;
                 $scope.alertMsgResetPasswordError = false;
                 $scope.alertMsgResetPasswordSuccess = false;
+
+                authFactory.getRememberSession().then(function (response) {
+                    if (response) {
+                        $state.go("adminDashboard.clients");
+                    }
+                }).catch(function (respponse) {
+                    $state.go("login");
+                })
+
+
+
 
                 $scope.login = function () {
                     $('#login-submit').attr('disabled', 'disabled');
@@ -37,7 +48,8 @@
                             // Si se ha logueado correctamente, lo tratamos aquí.
                             // Podemos también redirigirle a una ruta
                             authFactory.userAuth().then(function (response) {
-                                localStorage.setItem("userStandartApp", JSON.stringify(response))
+                                cyptoCache.put('userStandartApp',JSON.stringify(response));
+
                                 switch (response.user.rule_id) {
                                     case 1:
                                         $rootScope.envName = "adminDashboard";

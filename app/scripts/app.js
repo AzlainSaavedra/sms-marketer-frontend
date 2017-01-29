@@ -26,9 +26,10 @@ angular
         'ngTable',
         'ngMessages',
         'validation.match',
-        'ngCors'
+        'ngCors',
+        'mdo-angular-cryptography'
     ])
-    .config(function ($httpProvider, $stateProvider, $urlRouterProvider, $authProvider, $ocLazyLoadProvider) {
+    .config(function ($httpProvider, $stateProvider, $urlRouterProvider, $authProvider, $ocLazyLoadProvider, $cryptoProvider) {
 
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -38,6 +39,7 @@ angular
         $authProvider.signupUrl = url_base + "/register";
         $authProvider.tokenName = "token";
         $authProvider.tokenPrefix = "myApp";
+        $cryptoProvider.setCryptographyKey('ABCD123');
 
 
 
@@ -52,7 +54,7 @@ angular
                 controller: function (authFactory, $state) {
                     authFactory.getRememberSession().then(function (response) {
                         if (response) {
-                            $state.go("main.test");
+                            $state.go("adminDashboard.clients");
                         } else {
                             $state.go("login");
                         }
@@ -159,4 +161,6 @@ angular
             })
 
         $urlRouterProvider.otherwise('/');
-    });
+    }).factory('smsMarketerCache', ['$cacheFactory', function($cacheFactory) {
+        return $cacheFactory('smsMarketerCache');
+    }]);

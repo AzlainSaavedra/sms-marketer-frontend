@@ -8,7 +8,8 @@
  * Controller of the standartApp
  */
 angular.module('standartApp')
-    .controller('UsersCtrl',['$scope','$rootScope','NgTableParams','user','$location','$window', function ($scope, $rootScope, NgTableParams, userFact, $location, $window) {
+    .controller('UsersCtrl',['$scope','$rootScope','NgTableParams','user','$location','$window','commonFactory',
+        function ($scope, $rootScope, NgTableParams, userFact, $location, $window, commonFactory) {
 
         $scope.usersList = [];
         $scope.user = {};
@@ -23,6 +24,10 @@ angular.module('standartApp')
         $scope.showModalDeleteUser = showModalDeleteUser;
 
         $scope.initCtrl();
+
+
+
+
 
 
         /**
@@ -78,7 +83,10 @@ angular.module('standartApp')
 
         function getUsers() {
             userFact.getUsers().then(function (response) {
-                $scope.usertList = response.data
+                $scope.usertList = response.data;
+                $scope.usertList.forEach(function (item) {
+                    item.rolName = commonFactory.rolsNames(item.rule_id);
+                })
                 $scope.initTable($scope.usertList);
             })
         }
@@ -118,9 +126,15 @@ angular.module('standartApp')
 
         function removeUser() {
             userFact.deleteUser($scope.user.id).then(function (response) {
-                $scope.getUsers();
-                $('#modalDeleteUser').modal("hide");
-                $rootScope.showMessage("Usuario guardado exitosamente!.", "success");
+                if(response.status != 'error'){
+                    $scope.getUsers();
+                    $('#modalDeleteUser').modal("hide");
+                    $rootScope.showMessage("Usuario guardado exitosamente!.", "success");
+                }else{
+                    $('#modalDeleteUser').modal("hide");
+                    $rootScope.showMessage(response.data, "danger");
+                }
+
             }).catch(function (err) {
                 $rootScope.showMessage("Error en la operacion!.", "danger");
             })

@@ -8,7 +8,7 @@
  * Controller of the standartApp
  */
 angular.module('standartApp')
-    .controller('masterController', function ($rootScope, $scope, $auth, $state, authFactory, $interval, $controller, commonFactory) {
+    .controller('masterController', function ($rootScope, $scope, $auth, $state, authFactory, $interval, $controller, commonFactory, cyptoCache) {
 
         $controller('ConfigurationController', {$scope: $scope});
 
@@ -40,8 +40,8 @@ angular.module('standartApp')
                 .then(function (data) {
                     // Si se ha logueado correctamente, lo tratamos aquí.
                     // Podemos también redirigirle a una ruta
-                    localStorage.setItem("standartApp_remember_session", false);
-                    localStorage.removeItem("userStandartApp");
+                    cyptoCache.remove("standartApp_remember_session")
+                    cyptoCache.remove("userStandartApp");
                     $state.go("login");
                 })
                 .catch(function (response) {

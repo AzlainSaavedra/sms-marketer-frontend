@@ -29,14 +29,14 @@
                                     {{row.firstName}} {{row.lastName}}
                                 </td>
                                 <td data-title="'Rol'" filter="{ rule_id: 'number'}" sortable="'rule_id'">
-                                    {{row.rule_id}}
+                                    {{row.rolName}}
                                 </td>
                                 <td data-title="'Estado'" filter="{ status: 'text'}" sortable="'status'">
-                                    {{row.status}}
+                                    {{row.status?'Activo':'Inactivo'}}
                                 </td>
                                 <td data-title="'Acciones'" style="text-align: center">
                                     <a href="" class="fa fa-pencil" title="Editar usuario" ng-click="showUserForm('edit',row)"></a>
-                                    <a href="" class="fa fa-remove" title="Eliminar usuario" ng-click="showModalDeleteUser(row)"></a>
+                                    <a ng-if="row.rule_id!=1" href="" class="fa fa-remove" title="Eliminar usuario" ng-click="showModalDeleteUser(row)"></a>
                                 </td>
                             </tr>
                         </table>
