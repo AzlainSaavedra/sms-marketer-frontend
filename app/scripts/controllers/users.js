@@ -13,6 +13,7 @@ angular.module('standartApp')
 
         $scope.usersList = [];
         $scope.user = {};
+        $scope.typeUserForm = true;
         $scope.initCtrl = initCtrl;
         $scope.getUsers = getUsers;
         $scope.getUser = getUser;
@@ -22,6 +23,7 @@ angular.module('standartApp')
         $scope.initTable = initTable;
         $scope.showUserForm = showUserForm;
         $scope.showModalDeleteUser = showModalDeleteUser;
+        $scope.resetForm = resetForm;
 
         $scope.initCtrl();
 
@@ -34,22 +36,29 @@ angular.module('standartApp')
          * Mostrar modal para cerrar la sesion
          */
         function showUserForm(verb, user) {
-            console.log(user)
+            $scope.user=null;
             $("#modalUser").modal("show");
             switch (verb){
                 case "add":
+                    $scope.typeUserForm = true;
                     $scope.titleForm = "Agregar usuario";
                     $scope.btnOk = "Agregar";
-                    $scope.user.status = true;
-                    $('input[name=status]').attr("disabled","disabled");
-                    $('#email').removeAttr("disabled");
+                    $scope.user = {
+                        status: 1
+                    }
+                    //$('input[name=status]').attr("disabled","disabled");
+                    //$('#email').removeAttr("disabled");
                     break;
 
                 case "edit":
+                    $scope.user=null;
+                    $scope.user=user;
+                    $scope.typeUserForm = false;
                     $scope.titleForm = "Editar usuario";
                     $scope.btnOk = "Guardar";
                     $scope.user = angular.copy(user);
-                    $('input[name=status]').removeAttr("disabled");
+                    if(user.rule_id==1)
+                        $('input[name=status]').attr("disabled","disabled");
                     $('#email').attr("disabled","disabled");
                     if (!$scope.user.idType) {
                         $scope.user.idType = "V";
@@ -99,7 +108,6 @@ angular.module('standartApp')
 
         function addUser(user, form) {
             userFact.postUser(user).then(function (response) {
-                console.log(response)
                 $scope.getUsers();
                 $('#modalUser').modal("hide");
                 $scope.user = {};
@@ -138,5 +146,12 @@ angular.module('standartApp')
             }).catch(function (err) {
                 $rootScope.showMessage("Error en la operacion!.", "danger");
             })
+        }
+        
+        function resetForm(form) {
+            form.$setPristine(true);
+            form.$setDirty(false);
+            form.submited = false;
+            $scope.user = null;
         }
     }]);

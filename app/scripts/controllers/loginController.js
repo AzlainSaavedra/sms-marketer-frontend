@@ -5,9 +5,10 @@
     "use strict";
     angular.module('standartApp')
         .controller('loginController', ['$scope', '$http', '$q', '$rootScope', '$log', '$state', '$auth', '$timeout',
-            'authFactory', 'cyptoCache',
-            function ($scope, $http, $q, $rootScope, $log, $state, $auth, $timeout, authFactory, cyptoCache) {
+            'authFactory', 'cyptoCache','$facebook',
+            function ($scope, $http, $q, $rootScope, $log, $state, $auth, $timeout, authFactory, cyptoCache, $facebook) {
 
+                $scope.isLoggedIn = false;
                 $scope.email = "";
                 $scope.password = "";
                 $scope.alertMsgLoginFailed = false;
@@ -24,6 +25,14 @@
                 }).catch(function (respponse) {
                     $state.go("login");
                 })
+
+
+
+                $scope.loginFB = function() {
+                    $facebook.login().then(function(response) {
+                       console.log(response)
+                    });
+                }
 
 
 

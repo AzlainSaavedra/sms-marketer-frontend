@@ -130,3 +130,13 @@
   width: auto;
   height: auto;
 }
+.btn-facebook{
+    color: #fff;
+    background-color: #337ab7;
+    margin: 5px 0px;
+}
+.btn-facebook:hover,
+.btn-facebook:focus{
+    color: #fff;
+    background-color: #337ab7;
+}
